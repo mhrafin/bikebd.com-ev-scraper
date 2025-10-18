@@ -1,6 +1,8 @@
 import scrapy
 
 class BikeItem(scrapy.Item):
+    url = scrapy.Field()
+    page = scrapy.Field()
     bike_name = scrapy.Field()
     brand = scrapy.Field()
     cc = scrapy.Field()
