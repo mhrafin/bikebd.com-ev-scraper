@@ -19,7 +19,8 @@ class AllevspiderSpider(scrapy.Spider):
             bike_href = bike.css("a").attrib["href"]
             model = bike_href.split("/")[-1]
             spec_url = f"https://www.bikebd.com/price/{model}/specifications"
-            self.bike_item["page"] = response.url
+            # self.bike_item["page"] = response.url
+            self.bike_item["url"] = bike_href
             yield scrapy.Request(spec_url, callback=self.parse_spec_url)
             # break
         next_page_href = response.css("ul.pagination li a")[-1].attrib["href"]
@@ -74,5 +75,5 @@ class AllevspiderSpider(scrapy.Spider):
                 self.bike_item[key_n_values[0]] = key_n_values[1]
 
         # print(result)
-        self.bike_item["url"] = response.url
+        # self.bike_item["url"] = response.url
         yield self.bike_item
